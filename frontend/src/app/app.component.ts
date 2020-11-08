@@ -50,6 +50,8 @@ export class AppComponent implements OnInit {
 
   addTask() {
     if (this.newTaskDescr !== '') {
+      if (this.newTaskDescr.length > 255)
+        this.newTaskDescr = this.newTaskDescr.substr(0, 255);
       const newTask = new TaskDb(null, this.newTaskDescr, false);
       this.newTaskDescr = '';
       this.tasksService.addTask(newTask);
