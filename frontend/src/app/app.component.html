@@ -1,0 +1,38 @@
+<div class="container">
+  <h1 class="title">Java ToDo</h1>
+
+  <form class="form" (submit)="addTask()">
+    <mat-form-field class="form__input" appearance="outline">
+      <mat-label>Input some task...</mat-label>
+      <input name="description" matInput [(ngModel)]="newTaskDescr" />
+    </mat-form-field>
+    <button type="submit" class="form__button" mat-fab color="primary">
+      <mat-icon>add</mat-icon>
+    </button>
+  </form>
+
+  <div class="controls">
+    <div class="controls_left">
+      <button mat-stroked-button (click)="checkAll()">{{ checkBtnValue }}</button>
+      <div class="controls__info">
+        <span>Tasks left: </span>
+        <span>{{ tasksLeftNumber }}</span>
+      </div>
+    </div>
+    <mat-form-field class="controls_center" appearance="outline">
+      <mat-select [(ngModel)]="filterValue" (ngModelChange)="changeFilter()">
+        <mat-option [value]="option" *ngFor="let option of filters">{{ option }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="controls_right">
+      <button mat-stroked-button [disabled]="allUnchecked" (click)="deleteChecked()">Delete checked</button>
+    </div>
+  </div>
+
+  <div class="tasks" *ngIf="shownTasks.length > 0; else noTasks">
+    <app-task *ngFor="let task of shownTasks" [task]="task"></app-task>
+  </div>
+  <ng-template #noTasks>
+    <div class="tasks__no">There is no tasks yet...</div>
+  </ng-template>
+</div>

@@ -1,0 +1,22 @@
+@import '../../assets/vars'
+
+.task
+  display flex
+  justify-content space-between
+  align-items center
+  margin-bottom 10px
+  &__checkbox
+    display flex
+    flex-grow 1
+    &.mat-checkbox-checked
+      color: lighten($cFontDark, 50)
+      text-decoration: line-through
+  &__input
+    flex-grow 1
+    border: none
+    font-size 16px
+    margin-left 6px
+    border-bottom 1px solid lighten($cFontDark, 50)
+    transition: .2s
+  &__btn
+    margin-left 15px

@@ -1,0 +1,31 @@
+<mat-card class="task">
+  <mat-checkbox
+    class="task__checkbox"
+    [(ngModel)]="task.isDone"
+    *ngIf="!task.editing; else taskInput"
+    (ngModelChange)="changeChecked()"
+    >{{ task.description }}</mat-checkbox
+  >
+  <ng-template #taskInput>
+    <div class="task__checkbox">
+      <mat-checkbox [(ngModel)]="task.isDone" (ngModelChange)="changeChecked()">
+        <aria-label> </aria-label>
+      </mat-checkbox>
+      <input
+        class="task__input"
+        type="text"
+        [(ngModel)]="task.description"
+        [readonly]="!task.editing"
+      />
+    </div>
+  </ng-template>
+  <button class="task__btn" mat-mini-fab color="primary" (click)="toggleEdit()">
+    <mat-icon *ngIf="!task.editing; else taskEdit">edit</mat-icon>
+    <ng-template #taskEdit>
+      <mat-icon>done</mat-icon>
+    </ng-template>
+  </button>
+  <button class="task__btn" mat-mini-fab color="primary" (click)="deleteTask()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-card>
